@@ -4,7 +4,6 @@
 
 >Introducing tree‑sitter‑objectscript: High‑Performance Syntax Parsing for ObjectScript in Your Favorite Editors
 
-
 # ビルド方法
 tree-sitter-objectscriptをpythonから使える用にビルドします。setup.pyがあるので下記を実行するだけです。
 
@@ -61,7 +60,7 @@ source_file [Point(row=0, column=0)-Point(row=22, column=0)]
 {'kw': [<Node type=keyword_write, start_point=(12, 4), end_point=(12, 9)>, <Node type=keyword_write, start_point=(19, 4), end_point=(19, 9)>]}
 ```
 
-最後の{'kw':...を見ると、writeコマンドが12行目の4~9列と、19行目の4~9列目にあることが分かります。
+最後の{'kw':...を見ると、writeコマンドが12行目の4～9列と、19行目の4～9列目にあることが分かります。
 
 
 ## 複数ルール化
@@ -70,12 +69,13 @@ source_file [Point(row=0, column=0)-Point(row=22, column=0)]
 
 [parse_rules.py](./parse_rules.py)
 
-## 入力をファイルに変更したもの
+## ソースコードの引数化
+
+ソースコードの入力をファイル渡しに変更し、Lintっぽくしたものです。
 
 [parse_files.py](./parse_files.py)
 
 [Sample.Test.cls](./Sample.Test.cls)
-
 
 実行例
 ```
