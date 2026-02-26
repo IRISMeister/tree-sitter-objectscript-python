@@ -1,0 +1,13 @@
+ROUTINE test
+main()
+#define MYMACRO1 123
+ //Set $ZTRAP="ERR"
+ set a=1
+ write a
+ Quit
+
+sub1()
+ Set $ZTRAP="ERR"
+ Quit
+ERR 
+ Quit

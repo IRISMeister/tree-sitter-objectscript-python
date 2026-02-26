@@ -2,6 +2,11 @@ from tree_sitter import Parser, Language, Query,QueryCursor
 import tree_sitter_objectscript
 import sys
 
+def dump(node, indent=0):
+    print("  " * indent + f"{node.type} [{node.start_point}-{node.end_point}]")
+    for c in node.children:
+        dump(c, indent + 1)
+
 def lint_file(path):
     lang = Language(tree_sitter_objectscript.language_objectscript())
 
@@ -12,6 +17,7 @@ def lint_file(path):
         code=f.read()
         tree = parser.parse(code.encode("utf8"))
         root = tree.root_node
+        dump(root)
 
         # 複数Rule
         RULES = {
@@ -30,7 +36,7 @@ def lint_file(path):
                 command_set
                     (set_argument
                     (system_defined_variable) @kw
-                    (#match? @kw "^\\$(ZT|ZTAP|ETRAP)$")
+                    (#match? @kw "^\\$(ZT|ZTRAP|ETRAP)$")
                     )
                 )
                 """,

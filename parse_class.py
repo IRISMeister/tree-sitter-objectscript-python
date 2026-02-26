@@ -12,6 +12,9 @@ Class Sample.Test
 ClassMethod trap()
 {
     Set $ZT="ERR"
+    Set var=1
+    Set ^glo=1
+
     Quit
 ERR
     Quit
@@ -27,6 +30,15 @@ ClassMethod Bye()
 {
     Write "Bye"
 }
+ClassMethod TryCatch()
+{
+    Try {
+        Set a=3/0
+    }
+    Catch {
+        Write "Error trapped"
+    }
+}
 }
 """
 
@@ -39,14 +51,23 @@ def dump(node, indent=0):
         dump(c, indent + 1)
 # 全ダンプ表示
 dump(root)
+print("----")
 
-
-query = Query(lang, 
-"""
+q=r"""
 (command_write
   (keyword_write) @kw
 )
-""")
+
+(
+    command_set
+    (set_argument
+        (system_defined_variable) @kw
+        (#match? @kw "^\\$(ZT|ZTRAP|ETRAP)$")
+    )
+)
+"""
+
+query = Query(lang, q)
 
 # このあたりの書き方がバージョン間での変化が激しい模様
 query_cursor = QueryCursor(query)
@@ -56,4 +77,7 @@ print(captures)
 for capture_name, nodes in captures.items():
     for node in nodes:
         line = node.start_point[0] + 1
-        print(f"{line}: WRITE の使用は禁止されています。{capture_name} {node.type}")
+        if node.type == "keyword_write":
+            print(f"{line}: WRITE の使用は禁止されています。{capture_name} {node.type}")
+        if node.type == "system_defined_variable":
+            print(f"{line}: $ZTRAP / $ETRAP の使用は禁止されています（TRY/CATCH を使用してください）。{capture_name} {node.type}")
