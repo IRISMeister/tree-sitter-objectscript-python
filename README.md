@@ -83,6 +83,15 @@ source_file [Point(row=0, column=0)-Point(row=25, column=0)]
 
 [Sample.Test.cls](./Sample.Test.cls)
 
+## 複雑なロジック
+
+単純なクエリ(特定ノードのある・なし)だけでは判断できないようなロジックの例。Catchブロック内にthrow命令が無い(エラーが飲み込まれるかも?)場合に警告する。
+
+[parse_walk.py](./parse_walk.py)
+
+> Catch内でstatusを作成して、それを戻り値で呼び出し元に渡しているかもしれない。本来は、そこまで検知しないと誤検出が増える。
+
+
 実行例
 ```
 $ python parse_class_files.py Sample.Test.cls
