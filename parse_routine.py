@@ -6,12 +6,12 @@ lang = Language(tree_sitter_objectscript_core.language_objectscript_core())
 parser = Parser()
 parser.language = lang
 
-code = b"""
-#define MYMACRO1 123
- set a=1
- write a
- Quit
-"""
+#code = b"""
+##define MYMACRO1 123
+# set a=1
+# write a
+# Quit
+#"""
 
 with open("test.mac", encoding="utf8") as f:
     # vscode形式の場合先頭にROUTINE xxx のような行が入るのでそれを読み飛ばす

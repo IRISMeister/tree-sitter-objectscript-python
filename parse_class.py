@@ -55,14 +55,16 @@ print("----")
 
 q=r"""
 (command_write
-  (keyword_write) @kw
+  (keyword_write) @cap_command_write
 )
+
+(command_goto (keyword_goto) @cap_command_goto)
 
 (
     command_set
     (set_argument
-        (system_defined_variable) @kw
-        (#match? @kw "^\\$(ZT|ZTRAP|ETRAP)$")
+        (system_defined_variable) @cap_error_trap
+        (#match? @cap_error_trap "^\\$(ZT|ZTRAP|ETRAP)$")
     )
 )
 """
@@ -77,7 +79,9 @@ print(captures)
 for capture_name, nodes in captures.items():
     for node in nodes:
         line = node.start_point[0] + 1
-        if node.type == "keyword_write":
+        if capture_name == "cap_command_write":
             print(f"{line}: WRITE の使用は禁止されています。{capture_name} {node.type}")
-        if node.type == "system_defined_variable":
+        if capture_name == "cap_error_trap":
             print(f"{line}: $ZTRAP / $ETRAP の使用は禁止されています（TRY/CATCH を使用してください）。{capture_name} {node.type}")
+        if capture_name == "cap_command_goto":
+            print(f"{line}: GOTOの使用は禁止されています。{capture_name} {node.type}")

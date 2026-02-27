@@ -79,17 +79,17 @@ source_file [Point(row=0, column=0)-Point(row=25, column=0)]
 
 ソースコードの入力をファイル渡しに変更し、Lintっぽくしたものです。
 
-[parse_class_files.py](./parse_class_files.py)
+[parse_class_file.py](./parse_class_file.py)
 
 [Sample.Test.cls](./Sample.Test.cls)
 
 ## 複雑なロジック
 
-単純なクエリ(特定ノードのある・なし)だけでは判断できないようなロジックの例。Catchブロック内にthrow命令が無い(エラーが飲み込まれるかも?)場合に警告する。
+単純なクエリ(特定ノードのある・なし)だけでは判断できないようなロジックの例。Catchブロック内にthrow命令が無い(エラーが飲み込まれるかも?)場合に警告を出します。
 
 [parse_walk.py](./parse_walk.py)
 
-> Catch内でstatusを作成して、それを戻り値で呼び出し元に渡しているかもしれない。本来は、そこまで検知しないと誤検出が増える。
+> Catch内でstatusを作成して、それを戻り値で呼び出し元に渡しているかもしれない。本来は、そこまで検知しないと誤検出が増えます。
 
 
 実行例
@@ -119,7 +119,7 @@ Sample.Test.cls:5 $ZTRAP / $ETRAP の使用は禁止されています（TRY/CAT
 Set $ZT="ERR"にマッチするCSTを教えて。
 ```
 
-ただし、試しに全てのコマンド(node typeがcommand_で始まる)をマッチするCSTを要求した際の回答は下記だったが、これは誤り。
+ただし、試しに全てのコマンド(node typeがcommand_で始まる)をマッチするCSTを要求した際の回答は下記だったが、これは誤りでした。
 ```
 q="""
 ((_) @command (#match? @command "^command_"))
