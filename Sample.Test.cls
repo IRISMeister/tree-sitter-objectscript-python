@@ -18,6 +18,8 @@ END
     }
     ClassMethod Bye()
     {
+        Set XYZ=1
+        Set aBC=1
         Write "Bye"
     }
     ClassMethod TryCatch()
