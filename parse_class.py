@@ -1,10 +1,10 @@
 from __future__ import annotations
 from typing import Iterable, List, Tuple
 from tree_sitter import Parser, Language, Node, Query, QueryCursor
-import tree_sitter_objectscript
+import tree_sitter_objectscript_udl
 
 # language and parser are shared constants
-LANG = Language(tree_sitter_objectscript.language_objectscript())
+LANG = Language(tree_sitter_objectscript_udl.language_objectscript_udl())
 
 def make_parser() -> Parser:
     """Return a freshly initialised ``Parser`` for ObjectScript."""

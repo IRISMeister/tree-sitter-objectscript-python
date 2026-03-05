@@ -72,8 +72,11 @@ source_file [Point(row=0, column=0)-Point(row=25, column=0)]
 
 [parse_routine.py](./parse_routine.py)
 
-ルーチン(クラス定義ではないもの)も処理可能です。
+```
+$ python parse_routine.py
+```
 
+ルーチン(クラス定義ではないもの)も処理可能です。
 
 ## ソースコードの引数化
 
@@ -82,6 +85,16 @@ source_file [Point(row=0, column=0)-Point(row=25, column=0)]
 [parse_class_file.py](./parse_class_file.py)
 
 [Sample.Test.cls](./Sample.Test.cls)
+
+```
+$ python parse_class_file.py Sample.Test.cls
+Sample.Test.cls:14 WRITE の使用は禁止されています
+Sample.Test.cls:31 WRITE の使用は禁止されています
+Sample.Test.cls:23 WRITE の使用は禁止されています
+Sample.Test.cls:40 WRITE の使用は禁止されています
+Sample.Test.cls:15 GOTO の使用は禁止されています
+Sample.Test.cls:5 $ZTRAP / $ETRAP の使用は禁止されています（TRY/CATCH を使用してください）
+```
 
 ## 複雑なロジック
 
@@ -94,11 +107,12 @@ source_file [Point(row=0, column=0)-Point(row=25, column=0)]
 
 実行例
 ```
-$ python parse_class_files.py Sample.Test.cls
-Sample.Test.cls:14 WRITE の使用は禁止されています
-Sample.Test.cls:21 WRITE の使用は禁止されています
-Sample.Test.cls:15 GOTO の使用は禁止されています
-Sample.Test.cls:5 $ZTRAP / $ETRAP の使用は禁止されています（TRY/CATCH を使用してください）
+$ python parse_walk.py Sample.Test.cls
+      ・
+      ・
+Lint Error: THROW missing in CATCH at Point(row=29, column=8)
+      ・
+      ・
 ```
 
 # クエリの書き方

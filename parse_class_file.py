@@ -1,5 +1,5 @@
 from tree_sitter import Parser, Language, Query,QueryCursor
-import tree_sitter_objectscript
+import tree_sitter_objectscript_udl
 import sys
 
 def dump(node, indent=0):
@@ -8,7 +8,7 @@ def dump(node, indent=0):
         dump(c, indent + 1)
 
 def lint_file(path):
-    lang = Language(tree_sitter_objectscript.language_objectscript())
+    lang = Language(tree_sitter_objectscript_udl.language_objectscript_udl())
 
     parser = Parser()
     parser.language = lang
